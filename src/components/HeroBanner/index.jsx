@@ -4,7 +4,7 @@ export default function Component() {
     return (
         <Container>
             <Section>
-                <h2 class="sr-only">Promoted Content</h2>
+                <h2 className="sr-only">Promoted Content</h2>
                 <Subtitle>No fees.</Subtitle>
                 <Subtitle>No minimum deposit.</Subtitle>
                 <Subtitle>High interest rates.</Subtitle>
