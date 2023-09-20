@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 // Assets
 import logo from '../../assets/argentBankLogo.png'
 
-export const Header = styled.header``
 export const Navigation = styled.nav`
     display: flex;
     justify-content: space-between;

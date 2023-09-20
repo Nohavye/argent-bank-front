@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router'
-import { Header, Navigation, ItemLink as Link, LogoLink, Logo } from './styled'
+import { Navigation, ItemLink as Link, LogoLink, Logo } from './styled'
 
 const itemSettings = {
     signIn: { className: 'fa fa-user-circle', content: 'Sign In', link: '/signin' },
@@ -25,7 +25,7 @@ function ItemLinks() {
 
 export default function Component() {
     return (
-        <Header>
+        <header>
             <Navigation>
                 <LogoLink to="/">
                     <Logo alt="Argent Bank Logo" />
@@ -35,6 +35,6 @@ export default function Component() {
                     <ItemLinks />
                 </div>
             </Navigation>
-        </Header>
+        </header>
     )
 }
