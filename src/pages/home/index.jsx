@@ -1,7 +1,10 @@
+// Components
+import HeroBanner from '../../components/HeroBanner'
+
 export default function Page() {
     return (
-        <div>
-            <span>HOME</span>
-        </div>
+        <main>
+            <HeroBanner />
+        </main>
     )
 }
