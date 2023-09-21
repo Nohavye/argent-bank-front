@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 
 // Pages
 import HomePage from './pages/home'
+import SignInPage from './pages/signin'
 
 // Render
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -21,6 +22,7 @@ root.render(
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/signin" element={<SignInPage />} />
             </Routes>
             <Footer />
         </BrowserRouter>
