@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router'
-import { Navigation, ItemLink as Link, LogoLink, Logo } from './styled'
+import { Navigation, Link, LogoLink, Logo } from './styled'
 
 const itemSettings = {
     signIn: { className: 'fa fa-user-circle', content: 'Sign In', link: '/signin' },

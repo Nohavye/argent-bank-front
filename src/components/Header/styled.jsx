@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 // Assets
 import logo from '../../assets/argentBankLogo.png'
@@ -19,7 +19,7 @@ export const Navigation = styled.nav`
         color: #42b983;
     }
 `
-export const ItemLink = styled(Link)`
+export const Link = styled(RouterLink)`
     margin-right: 0.5rem;
 
     &:hover {
@@ -30,7 +30,7 @@ export const ItemLink = styled(Link)`
         margin-right: 0.5rem;
     }
 `
-export const LogoLink = styled(Link)`
+export const LogoLink = styled(RouterLink)`
     display: flex;
     align-items: center;
 `

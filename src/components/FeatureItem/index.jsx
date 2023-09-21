@@ -1,5 +1,4 @@
 import { Container, Icon, Title } from './styled'
-import icon from '../../assets/icon-chat.png'
 
 export default function Component({ icon, title, children }) {
     return (

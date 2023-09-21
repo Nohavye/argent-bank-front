@@ -8,6 +8,7 @@ import './index.css'
 
 // Components
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 // Pages
 import HomePage from './pages/home'
@@ -21,6 +22,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<HomePage />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     </React.StrictMode>
 )
