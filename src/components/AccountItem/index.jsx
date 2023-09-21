@@ -8,13 +8,13 @@ import {
     Button,
 } from './styled'
 
-export default function Component() {
+export default function Component({ data }) {
     return (
         <Container>
             <ContentWrapper>
-                <Title>Argent Bank Checking (x8349)</Title>
-                <Amount>$2,082.79</Amount>
-                <AmountDescription>Available Balance</AmountDescription>
+                <Title>{data.title}</Title>
+                <Amount>{data.amount}</Amount>
+                <AmountDescription>{data.description}</AmountDescription>
             </ContentWrapper>
             <ButtonWrapper>
                 <Button>View transactions</Button>
