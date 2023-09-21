@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 // Pages
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
+import UserPage from './pages/user'
 
 // Render
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -23,6 +24,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/user" element={<UserPage />} />
             </Routes>
             <Footer />
         </BrowserRouter>

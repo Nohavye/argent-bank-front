@@ -3,10 +3,13 @@ import { Navigation, Link, LogoLink, Logo } from './styled'
 
 const itemSettings = {
     login: { className: 'fa fa-user-circle', content: 'Sign In', link: '/login' },
+    user: { className: 'fa fa-user-circle', content: 'Tony', link: '/user' },
+    logout: { className: 'fa fa-sign-out', content: 'Sign Out', link: '/' },
 }
 const itemsPerRoute = {
     '/': [itemSettings.login],
     '/login': [itemSettings.login],
+    '/user': [itemSettings.user, itemSettings.logout],
 }
 
 function ItemLinks() {
