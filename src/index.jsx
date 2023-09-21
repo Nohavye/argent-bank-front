@@ -12,7 +12,7 @@ import Footer from './components/Footer'
 
 // Pages
 import HomePage from './pages/home'
-import SignInPage from './pages/signin'
+import LoginPage from './pages/login'
 
 // Render
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -22,7 +22,7 @@ root.render(
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/signin" element={<SignInPage />} />
+                <Route path="/login" element={<LoginPage />} />
             </Routes>
             <Footer />
         </BrowserRouter>

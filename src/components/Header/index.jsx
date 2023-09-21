@@ -2,11 +2,11 @@ import { useLocation } from 'react-router'
 import { Navigation, Link, LogoLink, Logo } from './styled'
 
 const itemSettings = {
-    signIn: { className: 'fa fa-user-circle', content: 'Sign In', link: '/signin' },
+    login: { className: 'fa fa-user-circle', content: 'Sign In', link: '/login' },
 }
 const itemsPerRoute = {
-    '/': [itemSettings.signIn],
-    '/signin': [itemSettings.signIn],
+    '/': [itemSettings.login],
+    '/login': [itemSettings.login],
 }
 
 function ItemLinks() {

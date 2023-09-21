@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 
-export const Container = styled.main`
-    flex: 1;
-    background-color: #12002b;
-`
-export const SigninSection = styled.section`
+export const LoginSection = styled.section`
     box-sizing: border-box;
     background-color: white;
     width: 300px;
@@ -31,7 +27,7 @@ export const InputWrapper = styled.div`
         font-size: 1.2rem;
     }
 `
-export const RememberWrapper = styled.div`
+export const OptionWrapper = styled.div`
     display: flex;
     align-items: center;
 
@@ -39,7 +35,7 @@ export const RememberWrapper = styled.div`
         margin-left: 0.25rem;
     }
 `
-export const SigninButton = styled(RouterLink)`
+export const Button = styled(RouterLink)`
     display: block;
     width: 100%;
     padding: 8px;
