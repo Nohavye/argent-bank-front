@@ -4,6 +4,8 @@ import { Container } from './styled'
 import WelcomHeader from '../../components/WelcomHeader'
 import AccountItem from '../../components/AccountItem'
 
+import { selectors } from '../../store'
+
 const accounts = [
     {
         title: 'Argent Bank Checking (x8349)',
@@ -23,10 +25,15 @@ const accounts = [
 ]
 
 export default function Page() {
+    const token = selectors.UserToken()
+
+    console.log('Page User')
+    console.log(token)
+
     return (
         <Container>
             <WelcomHeader />
-            <h2 class="sr-only">Accounts</h2>
+            <h2 className="sr-only">Accounts</h2>
             {accounts.map((account, index) => (
                 <AccountItem data={account} key={`account-${index}`} />
             ))}

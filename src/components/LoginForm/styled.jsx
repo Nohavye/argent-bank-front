@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link as RouterLink } from 'react-router-dom'
 
 export const LoginSection = styled.section`
     box-sizing: border-box;
@@ -35,7 +34,7 @@ export const OptionWrapper = styled.div`
         margin-left: 0.25rem;
     }
 `
-export const Button = styled(RouterLink)`
+export const Button = styled.button`
     display: block;
     width: 100%;
     padding: 8px;
@@ -46,4 +45,6 @@ export const Button = styled(RouterLink)`
     background-color: #00bc77;
     color: #fff;
     text-decoration: underline;
+    border-style: none;
+    cursor: pointer;
 `
