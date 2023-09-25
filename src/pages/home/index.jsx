@@ -8,8 +8,17 @@ import FeatureItem from '../../components/FeatureItem'
 import iconChat from '../../assets/icon-chat.png'
 import iconMoney from '../../assets/icon-money.png'
 import iconSecurity from '../../assets/icon-security.png'
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 export default function Page() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token')
+        if (token) navigate('/user')
+    }, [navigate])
+
     return (
         <main>
             <HeroBanner />

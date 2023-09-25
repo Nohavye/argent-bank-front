@@ -4,7 +4,14 @@ import { Navigation, Link, LogoLink, Logo } from './styled'
 const itemSettings = {
     login: { className: 'fa fa-user-circle', content: 'Sign In', link: '/login' },
     user: { className: 'fa fa-user-circle', content: 'Tony', link: '/user' },
-    logout: { className: 'fa fa-sign-out', content: 'Sign Out', link: '/' },
+    logout: {
+        className: 'fa fa-sign-out',
+        content: 'Sign Out',
+        link: '/',
+        callback: () => {
+            sessionStorage.removeItem('token')
+        },
+    },
 }
 const itemsPerRoute = {
     '/': [itemSettings.login],
@@ -19,7 +26,7 @@ function ItemLinks() {
     if (!items) return
 
     return items.map((item, index) => (
-        <Link to={item.link} key={`item-link-${index}`}>
+        <Link to={item.link} onClick={item.callback} key={`item-link-${index}`}>
             <i className={item.className}></i>
             {item.content}
         </Link>

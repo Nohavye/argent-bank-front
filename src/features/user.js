@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const { actions, reducer } = createSlice({
-    name: 'userToken',
+    name: 'user',
     initialState: null,
     reducers: {
+        reset: (state) => null,
         set: (state, action) => action.payload,
     },
 })

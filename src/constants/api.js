@@ -1,4 +1,4 @@
-import Api, { setRequest } from '../api/utils'
+import Api, { setRequest } from '../api'
 
 export const requests = {
     token: setRequest({

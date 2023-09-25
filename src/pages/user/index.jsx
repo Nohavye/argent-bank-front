@@ -1,10 +1,19 @@
 import { Container } from './styled'
 
+// React Query
+import { useQuery } from 'react-query'
+
+// Global State
+import { useDispatch } from 'react-redux'
+import { actions as userActions } from '../../features/user'
+
+// Api
+import Api from '../../api'
+import { requests } from '../../constants/api'
+
 // Components
 import WelcomHeader from '../../components/WelcomHeader'
 import AccountItem from '../../components/AccountItem'
-
-import { selectors } from '../../store'
 
 const accounts = [
     {
@@ -25,10 +34,21 @@ const accounts = [
 ]
 
 export default function Page() {
-    const token = selectors.UserToken()
+    const dispatch = useDispatch()
+    const token = sessionStorage.getItem('token')
 
-    console.log('Page User')
-    console.log(token)
+    useQuery(
+        'user',
+        async () => {
+            return await Api.processRequest({
+                request: requests.profile,
+                headers: { Authorization: `Bearer ${token}` },
+            })
+        },
+        {
+            onSuccess: (data) => dispatch(userActions.set(data)),
+        }
+    )
 
     return (
         <Container>

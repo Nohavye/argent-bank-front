@@ -2,24 +2,21 @@ import { useState } from 'react'
 import { LoginSection, Icon, InputWrapper, OptionWrapper, Button } from './styled'
 import { useMutation } from 'react-query'
 import { requests } from '../../constants/api'
-import Api from '../../api/utils'
+import Api from '../../api'
 import { useNavigate } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { actions as userToken } from '../../features/userToken'
 
 export default function Component() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const { mutate: loginMutation, error } = useMutation(
         async (payload) => {
-            const data = await Api.processRequest({ request: requests.token, body: payload })
-            if (data) dispatch(userToken.set(data))
+            return await Api.processRequest({ request: requests.token, body: payload })
         },
         {
-            onSuccess: () => {
+            onSuccess: (data) => {
+                sessionStorage.setItem('token', data)
                 navigate('/user')
             },
         }

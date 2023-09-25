@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 
 // Reducers
-import userTokenReducer from '../features/userToken'
+import userReducer from '../features/user'
 
 export default configureStore({
     reducer: {
-        userToken: userTokenReducer,
+        user: userReducer,
     },
 })
 
 export const selectors = {
-    UserToken: () => useSelector((state) => state.userToken),
+    User: () => useSelector((state) => state.user),
 }
