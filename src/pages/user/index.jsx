@@ -8,12 +8,14 @@ import { useDispatch } from 'react-redux'
 import { actions as userActions } from '../../features/user'
 
 // Api
-import Api from '../../api'
+import ApiClient from '../../api'
 import { requests } from '../../constants/api'
 
 // Components
 import WelcomHeader from '../../components/WelcomHeader'
 import AccountItem from '../../components/AccountItem'
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 const accounts = [
     {
@@ -36,14 +38,23 @@ const accounts = [
 export default function Page() {
     const dispatch = useDispatch()
     const token = sessionStorage.getItem('token')
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/login')
+        }
+    }, [navigate, token])
 
     useQuery(
         'user',
         async () => {
-            return await Api.processRequest({
-                request: requests.profile,
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            if (token) {
+                return await ApiClient.processRequest({
+                    request: requests.profile,
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+            }
         },
         {
             onSuccess: (data) => dispatch(userActions.set(data)),

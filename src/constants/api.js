@@ -1,4 +1,4 @@
-import Api, { setRequest } from '../api'
+import ApiClient, { setRequest } from '../api'
 
 export const requests = {
     token: setRequest({
@@ -10,4 +10,4 @@ export const requests = {
     profile: setRequest({ path: '/user/profile', method: 'POST', output: (data) => data.body }),
 }
 
-Api.set('http://localhost:3001/api/v1')
+ApiClient.set('http://localhost:3001/api/v1')
