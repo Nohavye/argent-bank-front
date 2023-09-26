@@ -21,6 +21,7 @@ import Footer from './components/Footer'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import UserPage from './pages/user'
+import ProfilePage from './pages/profile'
 
 // Query Client
 const queryClient = new QueryClient()
@@ -37,6 +38,7 @@ root.render(
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/user" element={<UserPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
                     </Routes>
                     <Footer />
                 </BrowserRouter>

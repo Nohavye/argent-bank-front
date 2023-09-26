@@ -7,7 +7,17 @@ export const requests = {
         headers: { 'Content-Type': 'application/json' },
         output: (data) => data.body.token,
     }),
-    profile: setRequest({ path: '/user/profile', method: 'POST', output: (data) => data.body }),
+    getProfile: setRequest({
+        path: '/user/profile',
+        method: 'POST',
+        output: (data) => data.body,
+    }),
+    updateProfile: setRequest({
+        path: '/user/profile',
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        output: (data) => data.body,
+    }),
 }
 
-ApiClient.set('http://localhost:3001/api/v1')
+ApiClient.set({ host: 'http://localhost:3001', basePath: '/api/v1' })

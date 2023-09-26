@@ -1,8 +1,14 @@
 import { Container, Button } from './styled'
 import { selectors } from '../../store'
+import { useNavigate } from 'react-router'
 
 export default function Component() {
     const user = selectors.User()
+    const navigate = useNavigate()
+
+    const handleButton = () => {
+        navigate('/profile')
+    }
 
     return (
         user && (
@@ -12,7 +18,7 @@ export default function Component() {
                     <br />
                     {`${user.firstName} ${user.lastName}!`}
                 </h1>
-                <Button>Edit Name</Button>
+                <Button onClick={handleButton}>Edit Name</Button>
             </Container>
         )
     )

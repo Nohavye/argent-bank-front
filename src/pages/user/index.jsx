@@ -41,9 +41,7 @@ export default function Page() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!token) {
-            navigate('/login')
-        }
+        if (!token) navigate('/login')
     }, [navigate, token])
 
     useQuery(
@@ -51,7 +49,7 @@ export default function Page() {
         async () => {
             if (token) {
                 return await ApiClient.processRequest({
-                    request: requests.profile,
+                    request: requests.getProfile,
                     headers: { Authorization: `Bearer ${token}` },
                 })
             }

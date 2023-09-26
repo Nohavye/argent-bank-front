@@ -9,8 +9,8 @@ export const setRequest = ({ path, method, headers, body, output }) => ({
 export default class ApiClient {
     static _url = null
 
-    static set(url) {
-        ApiClient._url = url
+    static set({ host, basePath }) {
+        ApiClient._url = host + basePath
     }
 
     static async processRequest({ request, headers, body }) {

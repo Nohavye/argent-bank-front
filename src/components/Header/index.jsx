@@ -5,7 +5,7 @@ import { actions as userActions } from '../../features/user'
 
 const itemSettings = {
     login: { className: 'fa fa-user-circle', content: 'Sign In', link: '/login' },
-    user: { className: 'fa fa-user-circle', content: 'Tony', link: '/user' },
+    profile: { className: 'fa fa-user-circle', content: 'Tony', link: '/profile' },
     logout: {
         className: 'fa fa-sign-out',
         content: 'Sign Out',
@@ -20,7 +20,8 @@ const itemSettings = {
 const itemsPerRoute = {
     '/': [itemSettings.login],
     '/login': [itemSettings.login],
-    '/user': [itemSettings.user, itemSettings.logout],
+    '/user': [itemSettings.profile, itemSettings.logout],
+    '/profile': [itemSettings.logout],
 }
 
 function ItemLinks() {
