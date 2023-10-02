@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux'
 import { actions as userActions } from '../../features/user'
 
 // Api
-import ApiClient from '../../api'
-import { requests } from '../../constants/api'
+import ApiClient from '../../apiClient'
+import { apiQueries } from '../../constants/api'
 
 // Components
 import WelcomHeader from '../../components/WelcomHeader'
@@ -49,7 +49,7 @@ export default function Page() {
         async () => {
             if (token) {
                 return await ApiClient.processRequest({
-                    request: requests.getProfile,
+                    apiQuery: apiQueries.getProfile,
                     headers: { Authorization: `Bearer ${token}` },
                 })
             }

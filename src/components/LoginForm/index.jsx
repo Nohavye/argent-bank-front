@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { LoginSection, Icon, InputWrapper, OptionWrapper, Button } from './styled'
 import { useMutation } from 'react-query'
-import { requests } from '../../constants/api'
-import ApiClient from '../../api'
+import { apiQueries } from '../../constants/api'
+import ApiClient from '../../apiClient'
 import { useNavigate } from 'react-router'
 
 export default function Component() {
@@ -12,7 +12,7 @@ export default function Component() {
 
     const { mutate: loginMutation, error } = useMutation(
         async (payload) => {
-            return await ApiClient.processRequest({ request: requests.token, body: payload })
+            return await ApiClient.processRequest({ apiQuery: apiQueries.token, body: payload })
         },
         {
             onSuccess: (data) => {

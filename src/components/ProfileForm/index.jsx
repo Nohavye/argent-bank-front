@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { LoginSection, Icon, InputWrapper, Button } from './styled'
 import { useMutation } from 'react-query'
-import { requests } from '../../constants/api'
-import ApiClient from '../../api'
+import { apiQueries } from '../../constants/api'
+import ApiClient from '../../apiClient'
 import { useNavigate } from 'react-router'
 import { selectors } from '../../store'
 
@@ -19,7 +19,7 @@ export default function Component() {
     const { mutate: updateProfile, error } = useMutation(
         async (payload) => {
             return await ApiClient.processRequest({
-                request: requests.updateProfile,
+                apiQuery: apiQueries.updateProfile,
                 headers: { Authorization: `Bearer ${token}` },
                 body: payload,
             })

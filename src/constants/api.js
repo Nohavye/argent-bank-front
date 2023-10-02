@@ -1,23 +1,35 @@
-import ApiClient, { setRequest } from '../api'
+import ApiClient, { setApiQuery } from '../apiClient'
 
-export const requests = {
-    token: setRequest({
+/**
+ * Module contenant des requêtes d'API pour interagir avec le serveur.
+ * @module constants/api
+ */
+
+/** Ensemble de requêtes d'API disponibles dans ce module.
+ * (Chaque requête est configurée à l'aide de la fonction `setApiQuery`)
+ */
+export const apiQueries = {
+    /** Requête pour obtenir le jeton d'authentification. */
+    token: setApiQuery({
         path: '/user/login',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        defaultHeaders: { 'Content-Type': 'application/json' },
         output: (data) => data.body.token,
     }),
-    getProfile: setRequest({
+    /** Requête pour obtenir le profil d'utilisateur. */
+    getProfile: setApiQuery({
         path: '/user/profile',
         method: 'POST',
         output: (data) => data.body,
     }),
-    updateProfile: setRequest({
+    /** Requête pour mettre à jour le profil d'utilisateur. */
+    updateProfile: setApiQuery({
         path: '/user/profile',
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        defaultHeaders: { 'Content-Type': 'application/json' },
         output: (data) => data.body,
     }),
 }
 
-ApiClient.set({ host: 'http://localhost:3001', basePath: '/api/v1' })
+// Paramétrage du client d'API.
+ApiClient.set({ hostUrl: 'http://localhost:3001', basePath: '/api/v1' })
