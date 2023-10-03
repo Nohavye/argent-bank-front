@@ -1,6 +1,10 @@
 import { Container, Button } from './styled'
-import { selectors } from '../../store'
+
+// Hooks
 import { useNavigate } from 'react-router'
+
+// Redux
+import { selectors } from '../../store'
 
 export default function Component() {
     const user = selectors.User()

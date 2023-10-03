@@ -8,6 +8,7 @@ import {
     Button,
 } from './styled'
 
+/** Composant représentant un compte sur la page de l'utilisateur */
 export default function Component({ data }) {
     return (
         <Container>

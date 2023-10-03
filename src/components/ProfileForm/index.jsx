@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
 import { LoginSection, Icon, InputWrapper, Button } from './styled'
-import { useMutation } from 'react-query'
-import { apiQueries } from '../../constants/api'
-import ApiClient from '../../apiClient'
+
+// Hooks
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { useMutation } from 'react-query'
+
+// Api
+import ApiClient from '../../apiClient'
+import { apiQueries } from '../../constants/api'
+
+// Redux
 import { selectors } from '../../store'
 
 export default function Component() {

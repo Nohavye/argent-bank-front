@@ -1,9 +1,11 @@
 import { Container } from './styled'
 
-// React Query
+// Hooks
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { useQuery } from 'react-query'
 
-// Global State
+// Redux
 import { useDispatch } from 'react-redux'
 import { actions as userActions } from '../../features/user'
 
@@ -14,26 +16,9 @@ import { apiQueries } from '../../constants/api'
 // Components
 import WelcomHeader from '../../components/WelcomHeader'
 import AccountItem from '../../components/AccountItem'
-import { useNavigate } from 'react-router'
-import { useEffect } from 'react'
 
-const accounts = [
-    {
-        title: 'Argent Bank Checking (x8349)',
-        amount: '$2,082.79',
-        description: 'Available Balance',
-    },
-    {
-        title: 'Argent Bank Savings (x6712)',
-        amount: '$10,928.42',
-        description: 'Available Balance',
-    },
-    {
-        title: 'Argent Bank Credit Card (x8349)',
-        amount: '$184.30',
-        description: 'Current Balance',
-    },
-]
+// Mocked data
+import { accounts } from '../../constants/mockedData'
 
 export default function Page() {
     const dispatch = useDispatch()
