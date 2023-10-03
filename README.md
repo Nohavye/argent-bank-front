@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# OC.P13 - Utiliser une API pour un compte utilisateur bancaire avec React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
