@@ -33,7 +33,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions:accountId:
+  /transactions/:accountId:
     get:
       security:
         - Bearer: []
@@ -55,6 +55,8 @@ paths:
             $ref: '#/definitions/TransactionListResponse'
         '400':
           description: Invalid Fields
+        '404':
+          description: Account Id not found
         '500':
           description: Internal Server Error
   /transaction:
@@ -84,7 +86,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields / Bad Request
         '500':
           description: Internal Server Error
   /transaction/:transactionId:
