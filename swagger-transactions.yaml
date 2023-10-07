@@ -1,217 +1,368 @@
-swagger: '2.0'
+openapi: 3.0.3
+
 info:
-  title: Bank Argent API documentation
-  description: Contains all available API endpoints in this codebase
+  title: Argent Bank API documentation
+  description: API modeling proposal for transaction management
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'
-host: localhost:3001
-basePath: /api/v1
-schemes:
-  - http
+  
+servers:
+  - url: http://localhost:3001/api/v1
+  
+tags:
+  - name: Accounts
+    description: Access to accounts
+  - name: Transactions
+    description: Access to transactions
+  - name: Transaction Details
+    description: Manipulate transaction details
+    
+security:
+  - bearerAuth: []
+    
 paths:
+
   /accounts:
     get:
-      security:
-        - Bearer: []
       tags:
-        - Accounts Module
+        - Accounts
       summary: Accounts API
       description: API for fetching the list of different accounts
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-      produces:
-        - application/json
+
       responses:
         '200':
-          description: Account list retrieved successully
-          schema:
-            $ref: '#/definitions/AccountListResponse'
+          $ref: '#/components/responses/accounts'
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
         '500':
-          description: Internal Server Error
-  /transactions/:accountId:
+          $ref: '#/components/responses/internalServerError'
+          
+  /transactions/{accountId}:
     get:
-      security:
-        - Bearer: []
       tags:
-        - Transactions Module
+        - Transactions
       summary: Transactions API
       description: API to retrieve the list of transactions from an account ( last month )
+      
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
+        - name: accountId
+          in: path
+          description: Account ID
           required: true
-      produces:
-        - application/json
+          schema:
+            type: string
+            
       responses:
         '200':
-          description: Account list retrieved successully
-          schema:
-            $ref: '#/definitions/TransactionListResponse'
+          $ref: '#/components/responses/transactions'
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
         '404':
-          description: Account Id not found
+          $ref: '#/components/responses/notFound'
         '500':
-          description: Internal Server Error
-  /transaction:
-    post:
-      security:
-        - Bearer: []
+          $ref: '#/components/responses/internalServerError'
+          
+  /transaction/{transactionId}/details:
+    get:
       tags:
-        - Transactions Module
+        - Transaction Details
       summary: Transactions API
-      description: API to create a transaction
+      description: API to retrieve transaction details
+      
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: body
-          name: body
-          description: Transaction attributes
+        - name: transactionId
+          in: path
+          description: Transaction ID
           required: true
           schema:
-            $ref: '#/definitions/CreatingTransaction'
-      produces:
-        - application/json
+            type: string
+      
+      responses:
+        '200':
+          $ref: '#/components/responses/transactionDetails'
+        '400':
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
+        '500':
+          $ref: '#/components/responses/internalServerError'
+          
+    post:
+      tags:
+        - Transaction Details
+      summary: Transactions API
+      description: API to create transaction details
+      
+      parameters:
+        - name: transactionId
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
+            type: string
+            
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/transactionDetailsProperties'
+            
       responses:
         '201':
-          description: Creating transaction successully
-          schema:
-            $ref: '#/definitions/TransactionResponse'
+          $ref: '#/components/responses/transactionDetailsCreated'
         '400':
-          description: Invalid Fields / Bad Request
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
         '500':
-          description: Internal Server Error
-  /transaction/:transactionId:
-    patch:
-      security:
-        - Bearer: []
+          $ref: '#/components/responses/internalServerError'
+          
+    put:
       tags:
-        - Transactions Module
+        - Transaction Details
       summary: Transactions API
-      description: API for updating a transaction
+      description: API to update transaction details
+      
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: body
-          name: body
-          description: Update transaction attributes
+        - name: transactionId
+          in: path
+          description: Transaction ID
           required: true
           schema:
-            $ref: '#/definitions/UpdatingTransaction'
-      produces:
-        - application/json
+            type: string
+            
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/transactionDetailsProperties'
+            
       responses:
         '200':
-          description: Updating transaction successully
-          schema:
-            $ref: '#/definitions/TransactionResponse'
+          $ref: '#/components/responses/transactionDetailsUpdated'
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
         '500':
-          description: Internal Server Error
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
-definitions:
-  TransactionListResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: string
-            accountId:
-              type: string
-            transactionDetails:
-              type: object
-              properties:
-                type:
-                  type: string
-                date:
-                  type: string
-                amount:
-                  type: number
-                description:
-                  type: string
-                status:
-                  type: string
-  CreatingTransaction:
-    type: object
-    properties:
-      accountId:
-        type: string
-      type:
-        type: string
-      amount:
-        type: number
-      description:
-        type: string
-    required:
-      - accountId
-      - type
-      - amount
-  TransactionResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
+          $ref: '#/components/responses/internalServerError'
+          
+    delete:
+      tags:
+        - Transaction Details
+      summary: Transactions API
+      description: API to delete transaction details
+      
+      parameters:
+        - name: transactionId
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
             type: string
-          accountId:
-            type: string
-  UpdatingTransaction:
-    type: object
-    properties:
-      status:
-        type: string
-      description:
-        type: string
-  AccountListResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: string
-            accountDetails:
-              type: object
-              properties:
-                name:
-                  type: string
-                type:
-                  type: string
-                description:
-                  type: string
-                amount:
-                  type: number
+            
+      responses:
+        '204':
+          $ref: '#/components/responses/transactionDetailsDeleted'
+        '400':
+          $ref: '#/components/responses/invalidFields'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
+        '500':
+          $ref: '#/components/responses/internalServerError'
+      
+components:
+
+  securitySchemes:
+  
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+  schemas:
+  
+    response:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+      required:
+        - status
+        - message
+        
+    accounts:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/account'
+            
+    account:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        balance:
+          type: number
+          format: float
+          
+    transactions:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction'
+            
+    transaction:
+      allOf:
+        - $ref: '#/components/schemas/transactionId'
+        - $ref: '#/components/schemas/transactionData'
+          
+    transactionId:
+      type: object
+      properties:
+        id:
+          type: string
+          
+    transactionData:
+      type: object
+      properties:
+        accountId:
+          type: string
+        type:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+          format: float
+        balance:
+          type: number
+          format: float
+          
+    transactionDetails:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/transactionDetailsProperties'
+              
+    transactionDetailsProperties:
+      type: object
+      properties:
+        category:
+          type: string
+        notes:
+          type: string
+      
+          
+  responses:
+  
+    unauthorized:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response'
+            
+    invalidFields:
+      description: Invalid Fields
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response'
+            
+    internalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response'
+            
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response'
+            
+    accounts:
+      description: Account list retrieved successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/accounts'
+              
+    transactions:
+      description: Transaction list retrieved successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/transactions'
+    
+    transactionDetails:
+      description: Transaction details retrieved successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/transactionId'
+              - $ref: '#/components/schemas/transactionDetails'
+              
+    transactionDetailsCreated:
+      description: Transaction details created successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/transactionId'
+              - $ref: '#/components/schemas/transactionDetails'
+              
+    transactionDetailsUpdated:
+      description: Transaction details updated successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/transactionId'
+              - $ref: '#/components/schemas/transactionDetails'
+              
+    transactionDetailsDeleted:
+      description: Transaction details deleted successully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/response'
+              - $ref: '#/components/schemas/transactionId'
